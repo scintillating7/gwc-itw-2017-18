@@ -12,11 +12,11 @@ var lastName = fullName[1];
 console.log(authorName);
 
 var goodreadsResponseURL = "https://www.goodreads.com/api/author_url/" + firstName + "+" + lastName + "?key=0waG22HpyhDCTJEp45psIw";
-// window.open(myURL)
+//window.open(goodreadsResponseURL);
 
 console.log(goodreadsResponseURL);
 
-var goodreadsXML = $.get("http://query.yahooapis.com/v1/public/yql",
+var goodreadsXML = $.get("https://query.yahooapis.com/v1/public/yql",
 {
     q: "select * from xml where url=\""+goodreadsResponseURL+"\"",
     format: "xml"
@@ -24,6 +24,7 @@ var goodreadsXML = $.get("http://query.yahooapis.com/v1/public/yql",
 
 function(xml){
     console.log(xml);
+    //TODO: REWORK THIS
     var authorLink = xml.documentElement.children["0"].childNodes["0"].childNodes[3].childNodes[3].textContent;
   window.open(authorLink);
 });
