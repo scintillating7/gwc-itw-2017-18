@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>GoodReads API Demo</title>
+
+    <!-- My CSS -->
+    <link href="css/mystyles.css" rel="stylesheet">
+
+    <!-- My JS -->
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <script src="js/myjavascript.js"></script>
+
+    <!-- Goodreads PHP -->
+    <?php require 'goodreads.php'; ?>
+
+  </head>
+
+
+  <body>
+  	<h4>Search by Author's Name</h4>
+	<input type="text" id="authorNameInput">
+	<button onclick="searchForAuthorName()">Search</button>
+
+	<h4>Search by Author by ID</h4>
+	<!--<input type="text" id="authorIDInput">
+	<button onclick="searchForAuthorByID()">Search</button>-->
+
+	<form action="goodreads.php" method="getAuthor">
+		<input type="text" name="authorId">
+		<input type="submit">
+	</form>
+
+  </body>
+</html>
