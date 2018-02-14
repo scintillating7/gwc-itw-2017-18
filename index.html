@@ -1,35 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <meta charset="utf-8">
-    <title>GoodReads API Demo</title>
-
-    <!-- My CSS -->
-    <link href="css/mystyles.css" rel="stylesheet">
-
-    <!-- My JS -->
-    <script src="js/jquery-1.9.1.min.js"></script>
-    <script src="js/myjavascript.js"></script>
-
-    <!-- Goodreads PHP -->
-    <?php require 'goodreads.php'; ?>
-
+    <meta name="viewport" content="width=device-width">
+    <title>GWC Project</title>
+    <link href="index.css" rel="stylesheet" type="text/css" />
   </head>
-
-
-  <body>
-  	<h4>Search by Author's Name</h4>
-	<input type="text" id="authorNameInput">
-	<button onclick="searchForAuthorName()">Search</button>
-
-	<h4>Search by Author by ID</h4>
-	<!--<input type="text" id="authorIDInput">
-	<button onclick="searchForAuthorByID()">Search</button>-->
-
-	<form action="goodreads.php" method="getAuthor">
-		<input type="text" name="authorId">
-		<input type="submit">
-	</form>
-
+  <body onload="initialize()">
+    <script src="index.js"></script>
+    <h1>Book Finder</h1>
+    <img src="https://nicolaalter.files.wordpress.com/2015/10/popular_fantasy_novels2.jpg" width= 400px;>
+    <input type="text" id= "input" placeholder="Search...">
+    <button type="button"><a style="text-decoration:none" onclick="Search()">Search</a></button>
+    <script src="eventHandlers.js"></script>
   </body>
 </html>
