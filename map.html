@@ -1,0 +1,87 @@
+<head>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script>
+  var map;
+  var infowindow;
+  
+  function initMap() {
+
+    var beijing = {lat: 39.913818, lng: 116.363625};
+  
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: beijing,
+      zoom: 15
+    });
+  
+    infoWindow = new google.maps.InfoWindow();
+    
+    // Try HTML5 geolocation.
+    //this if statement is to show the user's location on the map 
+    if (navigator.geolocation) { 
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var pos = {  //sets the user's location
+          lat: position.coords.latitude, //sets the latitude of the user's location
+          lng: position.coords.longitude //sets the longitude of the user's location
+        };
+
+        infoWindow.setPosition(pos); 
+        infoWindow.setContent('Location found.');
+        //infoWindow.open(map);
+        map.setCenter(pos); //sets the center of map to show the user's location 
+        
+         var service = new google.maps.places.PlacesService(map);
+          service.nearbySearch({
+            location: pos,
+            radius: 1500,
+            type: ['library']
+          }, callback);
+        
+      }, function() {
+        handleLocationError(true, infoWindow, map.getCenter());
+      });
+    } else {
+      // Browser doesn't support Geolocation
+      handleLocationError(false, infoWindow, map.getCenter()); 
+    }
+  
+   
+  } //end of initMap
+  
+  function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    infoWindow.setPosition(pos); 
+    infoWindow.setContent(browserHasGeolocation ?
+                          'Error: The Geolocation service failed.' :
+                          'Error: Your browser doesn\'t support geolocation.');
+    infoWindow.open(map);
+  }
+  
+  function callback(results, status) {
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+      for (var i = 0; i < results.length; i++) {
+        createMarker(results[i]);
+      }
+    }
+  }
+  
+  function createMarker(place) {
+    var placeLoc = place.geometry.location;
+    var marker = new google.maps.Marker({
+      map: map,
+      position: place.geometry.location
+    });
+  
+    google.maps.event.addListener(marker, 'click', function() {
+      infoWindow.setContent(place.name);
+      infoWindow.open(map, this);
+    });
+  }
+  </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvS-dqN0DWlIAW4CHvBTlKLkX3f8hI2eI&libraries=places&callback=initMap" async defer>
+</script>
+
+<link rel="stylesheet" href="map.css">
+</head>
+<body>
+  <div id="map"></div>
+  
+</body>
