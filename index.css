@@ -1,0 +1,23 @@
+.books {
+    position:absolute;
+    width:400px;
+    display:block;
+    z-index: 50;
+}
+
+.blue {
+  z-index: 100;
+}
+
+.library {
+  width:400px;
+  position: absolute;
+  top:272px;
+}
+
+#ratingBooks{
+  position: absolute;
+  width:100%;
+  height:100%;
+  background-color:#8797AF;
+}
